@@ -24,4 +24,11 @@ class _UsersState extends State<Users> {
       )),
     );
   }
+  Future<bool> usernameCheck(String username) async {
+    final result = await FirebaseFirestore.instance
+        .collection('users')
+        .where('username', isEqualTo: username)
+        .get();
+    return result.docs.isEmpty;
+  }
 }
